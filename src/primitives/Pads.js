@@ -27,7 +27,11 @@ export function createPads(data = []) {
     layer: PCB_LAYERS.TOP_COPPER,
   });
 
-  const padMesh = new THREE.InstancedMesh(padGeometry, copperMaterial, data.length);
+  const padMesh = new THREE.InstancedMesh(
+    padGeometry,
+    copperMaterial,
+    data.length
+  );
   const dummy = new THREE.Object3D();
   const idMap = {};
 
@@ -55,6 +59,7 @@ export function createPads(data = []) {
       size: [w, h],
       position: [x, y, z],
       instanceId: i,
+      raw: pad.raw || pad,
     };
   });
 

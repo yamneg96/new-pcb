@@ -90,7 +90,30 @@ export class InteractionManager {
    * Update hover state for instanced meshes.
    */
   _updateHover(hit) {
+    const canvas = this.engine.renderer.domElement;
+
+    if (!hit) {
+      this.hoveredInstanceId = -1;
+      if (canvas) {
+        canvas.style.cursor = "default";
+      }
+      this._updateShaderUniforms();
+      return;
+    }
+
     const newHoveredId = hit.instanceId !== undefined ? hit.instanceId : -1;
+
+    // Cursor: pointer over any interactable object (pads, traces, components)
+    const obj = hit.object;
+    const isInteractable =
+      newHoveredId >= 0 ||
+      obj.userData.type === "trace" ||
+      obj.userData.type === "pads_copper" ||
+      obj.userData.exportable;
+
+    if (canvas) {
+      canvas.style.cursor = isInteractable ? "pointer" : "default";
+    }
 
     if (this.hoveredInstanceId !== newHoveredId) {
       this.hoveredInstanceId = newHoveredId;
@@ -134,16 +157,22 @@ export class InteractionManager {
         this.transformControls.userData.instanceMesh = object;
         this.transformControls.userData.dummy = dummy;
 
-        const selectionData = {
+        const base = padData.raw || padData;
+        this.onSelectionChange({
+          ...base,
           id: padData.id,
           type: "pad",
           position: [dummy.position.x, dummy.position.y, dummy.position.z],
           size: padData.size.slice(),
           area: padData.size[0] * padData.size[1],
+          net: base.net,
+          layer: base.layer ?? "Top Copper",
+          component: base.component ?? base.refdes ?? base.ref,
+          pin: base.pin,
+          pad_type: base.pad_type ?? base.padType ?? base.pad,
           instanceId,
           object,
-        };
-        this.onSelectionChange(selectionData);
+        });
       }
     } else if (object.userData.type === "trace") {
       // Regular mesh (trace)
@@ -151,32 +180,45 @@ export class InteractionManager {
       this.selectedObject = object;
       this.transformControls.attach(object);
 
-      const selectionData = {
-        id: object.userData.id || "trace",
-        type: "trace",
+      const raw = object.userData.raw || {};
+      const start = object.userData.start || raw.start;
+      const end = object.userData.end || raw.end;
+      const length =
+        Array.isArray(start) && Array.isArray(end)
+          ? new THREE.Vector3().fromArray(start).distanceTo(new THREE.Vector3().fromArray(end))
+          : 0;
+      this.onSelectionChange({
+        ...raw,
+        id: object.userData.id || raw.id || "trace",
+        type: object.userData.type || raw.type || "trace",
         position: [object.position.x, object.position.y, object.position.z],
-        width: object.userData.width ?? 0,
-        area: 0, // Traces don't have pad-like area
+        width: object.userData.width ?? raw.width ?? 0,
+        length_mm: raw.length_mm ?? length,
+        net: raw.net ?? object.userData.net,
+        layer: raw.layer ?? "Top Copper",
+        area: 0,
         instanceId: -1,
         object,
-      };
-      this.onSelectionChange(selectionData);
-    } else if (object.userData.exportable && (object.userData.type === "ic" || object.userData.type === "component" || object.userData.type === "connector" || object.userData.type === "capacitor" || object.userData.type === "via")) {
-      // ICs and other components (standard meshes)
+      });
+    } else if (object.userData.exportable) {
+      // Any exportable component (standard meshes) - keep this generic so imported types work (MCU, DIP_IC, etc)
       this.selectedInstanceId = -1;
       this.selectedObject = object;
       this.transformControls.attach(object);
 
-      const selectionData = {
-        id: object.userData.id || object.userData.type || "component",
-        type: object.userData.type,
+      const raw = object.userData.raw || {};
+      this.onSelectionChange({
+        ...raw,
+        id: object.userData.id || raw.id || object.userData.type || "component",
+        type: object.userData.type || raw.type || "component",
         position: [object.position.x, object.position.y, object.position.z],
-        size: object.userData.size || [0, 0, 0],
+        size: object.userData.size || raw.size || [0, 0, 0],
+        net: raw.net,
+        layer: raw.layer,
         area: 0,
         instanceId: -1,
         object,
-      };
-      this.onSelectionChange(selectionData);
+      });
     } else {
       // Unhandled type – ignore
     }
@@ -214,10 +256,7 @@ export class InteractionManager {
     if (hits.length > 0) {
       this._updateHover(hits[0]);
     } else {
-      if (this.hoveredInstanceId !== -1) {
-        this.hoveredInstanceId = -1;
-        this._updateShaderUniforms();
-      }
+      this._updateHover(null);
     }
   }
 

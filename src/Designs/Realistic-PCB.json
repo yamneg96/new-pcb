@@ -1,0 +1,353 @@
+{
+  "board": {
+    "dimensions": {
+      "width": 120,
+      "height": 90,
+      "thickness": 1.6
+    },
+    "layers": {
+      "substrate": {
+        "material": "FR4",
+        "color": "#2e6b3f"
+      },
+      "copper_top": {
+        "color": "#c8732d",
+        "thickness": 0.035
+      },
+      "solder_mask": {
+        "color": "#1f7a3b"
+      },
+      "silkscreen": {
+        "color": "#ffffff"
+      }
+    }
+  },
+  "mounting_holes": [
+    {
+      "id": "MH1",
+      "pos": [
+        -55,
+        0,
+        -40
+      ],
+      "radius": 1.5
+    },
+    {
+      "id": "MH2",
+      "pos": [
+        55,
+        0,
+        -40
+      ],
+      "radius": 1.5
+    },
+    {
+      "id": "MH3",
+      "pos": [
+        -55,
+        0,
+        40
+      ],
+      "radius": 1.5
+    },
+    {
+      "id": "MH4",
+      "pos": [
+        55,
+        0,
+        40
+      ],
+      "radius": 1.5
+    }
+  ],
+  "components": [
+    {
+      "id": "U1",
+      "type": "DIP_IC",
+      "label": "MCU",
+      "body": {
+        "size": [
+          10,
+          3,
+          45
+        ],
+        "color": "#0a0a0a"
+      },
+      "pins": 40,
+      "position": [
+        -25,
+        1.6,
+        0
+      ]
+    },
+    {
+      "id": "U2",
+      "type": "VOLTAGE_REGULATOR",
+      "label": "MC7805",
+      "package": "TO-220",
+      "body": {
+        "color": "#9e9e9e"
+      },
+      "position": [
+        20,
+        1.6,
+        -5
+      ]
+    },
+    {
+      "id": "C1",
+      "type": "ELECTROLYTIC_CAPACITOR",
+      "value": "470uF",
+      "body": {
+        "radius": 6,
+        "height": 14,
+        "color": "#0e0e0e"
+      },
+      "top_mark": "#dcdcdc",
+      "position": [
+        35,
+        1.6,
+        15
+      ]
+    },
+    {
+      "id": "C2",
+      "type": "CERAMIC_CAPACITOR",
+      "value": "100nF",
+      "body": {
+        "radius": 3,
+        "height": 2.5,
+        "color": "#c96f2d"
+      },
+      "position": [
+        0,
+        1.6,
+        -20
+      ]
+    },
+    {
+      "id": "C3",
+      "type": "CERAMIC_CAPACITOR",
+      "value": "100nF",
+      "body": {
+        "radius": 3,
+        "height": 2.5,
+        "color": "#c96f2d"
+      },
+      "position": [
+        0,
+        1.6,
+        10
+      ]
+    },
+    {
+      "id": "R1",
+      "type": "RESISTOR",
+      "value": "10k",
+      "package": "AXIAL",
+      "bands": [
+        "brown",
+        "black",
+        "orange"
+      ],
+      "position": [
+        -10,
+        1.6,
+        -25
+      ]
+    },
+    {
+      "id": "R2",
+      "type": "RESISTOR",
+      "value": "1k",
+      "package": "AXIAL",
+      "bands": [
+        "brown",
+        "black",
+        "red"
+      ],
+      "position": [
+        -10,
+        1.6,
+        20
+      ]
+    },
+    {
+      "id": "LED1",
+      "type": "LED",
+      "color": "red",
+      "lens": "diffused",
+      "position": [
+        10,
+        1.6,
+        -15
+      ]
+    },
+    {
+      "id": "Q1",
+      "type": "TRANSISTOR",
+      "package": "TO-92",
+      "body": {
+        "color": "#1a1a1a"
+      },
+      "position": [
+        15,
+        1.6,
+        10
+      ]
+    },
+    {
+      "id": "J1",
+      "type": "PIN_HEADER",
+      "pins": 20,
+      "orientation": "horizontal",
+      "pin_color": "#d4af37",
+      "plastic_color": "#1c1c1c",
+      "position": [
+        -45,
+        1.6,
+        0
+      ]
+    },
+    {
+      "id": "J2",
+      "type": "POWER_JACK",
+      "body": {
+        "color": "#bdbdbd"
+      },
+      "position": [
+        30,
+        1.6,
+        -25
+      ]
+    }
+  ],
+  "vias": [
+    {
+      "id": "V1",
+      "pos": [
+        -20,
+        0,
+        -15
+      ],
+      "radius": 0.3
+    },
+    {
+      "id": "V2",
+      "pos": [
+        -18,
+        0,
+        15
+      ],
+      "radius": 0.3
+    },
+    {
+      "id": "V3",
+      "pos": [
+        10,
+        0,
+        0
+      ],
+      "radius": 0.3
+    }
+  ],
+  "traces": [
+    {
+      "id": "VCC",
+      "net": "VCC",
+      "width": 1.2,
+      "color": "#c8732d",
+      "path": [
+        [
+          30,
+          -25
+        ],
+        [
+          20,
+          -5
+        ],
+        [
+          -25,
+          0
+        ]
+      ]
+    },
+    {
+      "id": "GND",
+      "net": "GND",
+      "width": 1.5,
+      "color": "#c8732d",
+      "path": [
+        [
+          35,
+          15
+        ],
+        [
+          0,
+          10
+        ],
+        [
+          -25,
+          0
+        ]
+      ]
+    },
+    {
+      "id": "SIGNAL_LED",
+      "net": "GPIO",
+      "width": 0.4,
+      "path": [
+        [
+          -25,
+          0
+        ],
+        [
+          10,
+          -15
+        ]
+      ]
+    }
+  ],
+  "silkscreen": [
+    {
+      "text": "U1 MCU",
+      "pos": [
+        -25,
+        2,
+        25
+      ]
+    },
+    {
+      "text": "MC7805",
+      "pos": [
+        20,
+        2,
+        5
+      ]
+    },
+    {
+      "text": "R1 10K",
+      "pos": [
+        -10,
+        2,
+        -30
+      ]
+    },
+    {
+      "text": "R2 1K",
+      "pos": [
+        -10,
+        2,
+        25
+      ]
+    },
+    {
+      "text": "C1 470uF",
+      "pos": [
+        35,
+        2,
+        25
+      ]
+    }
+  ]
+}

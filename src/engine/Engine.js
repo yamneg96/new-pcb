@@ -105,7 +105,7 @@ export class Engine {
     }
 
     traceArray.forEach((t) => {
-      const mesh = createTrace(t.start, t.end, t.width);
+      const mesh = createTrace(t.start, t.end, t.width, t.raw);
       if (mesh) {
         this.traces.push(mesh);
         this.scene.add(mesh);
@@ -158,6 +158,7 @@ export class Engine {
     mesh.userData.type = type || "component";
     mesh.userData.size = size;
     mesh.userData.exportable = true;
+    mesh.userData.raw = component.raw || component;
 
     this.scene.add(mesh);
     this.components.push(mesh);

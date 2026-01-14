@@ -1,0 +1,121 @@
+{
+  "board": {
+    "width": 250,
+    "height": 80,
+    "thickness": 1.6
+  },
+  "holes": [
+    {
+      "pos": [
+        -110,
+        0,
+        -25
+      ],
+      "radius": 2
+    },
+    {
+      "pos": [
+        110,
+        0,
+        -25
+      ],
+      "radius": 2
+    },
+    {
+      "pos": [
+        -110,
+        0,
+        25
+      ],
+      "radius": 2
+    },
+    {
+      "pos": [
+        110,
+        0,
+        25
+      ],
+      "radius": 2
+    }
+  ],
+  "components": [
+    {
+      "id": 1,
+      "type": "TRANSFORMER",
+      "pos": [
+        -85,
+        0,
+        0
+      ]
+    },
+    {
+      "id": 2,
+      "type": "CAPACITOR",
+      "pos": [
+        -35,
+        0,
+        0
+      ],
+      "value": "4700uF"
+    },
+    {
+      "id": 3,
+      "type": "REGULATOR",
+      "pos": [
+        25,
+        0,
+        0
+      ]
+    },
+    {
+      "id": 4,
+      "type": "OUTPUT_TERMINAL",
+      "pos": [
+        95,
+        0,
+        0
+      ]
+    }
+  ],
+  "traces": [
+    {
+      "points": [
+        [
+          -85,
+          0
+        ],
+        [
+          -35,
+          0
+        ]
+      ],
+      "width": 1.5
+    },
+    {
+      "points": [
+        [
+          -35,
+          0
+        ],
+        [
+          25,
+          0
+        ]
+      ],
+      "width": 1.2
+    },
+    {
+      "points": [
+        [
+          25,
+          0
+        ],
+        [
+          95,
+          0
+        ]
+      ],
+      "width": 1.8
+    }
+  ]
+}

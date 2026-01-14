@@ -1,0 +1,108 @@
+{
+  "board": {
+    "width": 150,
+    "height": 100,
+    "thickness": 1.6
+  },
+
+  "components": [
+    {
+      "type": "ic",
+      "id": "IC1",
+      "name": "ATmega328P",
+      "position": [-30, 0.9, -20],
+      "body": {
+        "size": [18, 3, 18],
+        "color": "#111111"
+      },
+      "pins": [
+        { "id": "IC1_P1", "pos": [-36, 0.8, -26], "size": [1.5, 3.0] },
+        { "id": "IC1_P2", "pos": [-33, 0.8, -26], "size": [1.5, 3.0] },
+        { "id": "IC1_P3", "pos": [-30, 0.8, -26], "size": [1.5, 3.0] },
+        { "id": "IC1_P4", "pos": [-27, 0.8, -26], "size": [1.5, 3.0] }
+      ]
+    },
+
+    {
+      "type": "resistor",
+      "id": "R1",
+      "value": "10kΩ",
+      "position": [15, 0.9, -15],
+      "pads": [
+        { "id": "R1_P1", "pos": [10, 0.8, -15], "size": [2, 2.5] },
+        { "id": "R1_P2", "pos": [20, 0.8, -15], "size": [2, 2.5] }
+      ]
+    },
+
+    {
+      "type": "capacitor",
+      "id": "C1",
+      "value": "100nF",
+      "position": [-10, 0.9, 15],
+      "pads": [
+        { "id": "C1_P1", "pos": [-10, 0.8, 10], "size": [3, 4] },
+        { "id": "C1_P2", "pos": [-10, 0.8, 20], "size": [3, 4] }
+      ]
+    },
+
+    {
+      "type": "diode",
+      "id": "D1",
+      "name": "LED",
+      "position": [45, 0.9, -6],
+      "pads": [
+        { "id": "D1_A", "pos": [45, 0.8, -10], "size": [2, 3] },
+        { "id": "D1_C", "pos": [45, 0.8, -2], "size": [2, 3] }
+      ]
+    },
+
+    {
+      "type": "connector",
+      "id": "J1",
+      "name": "Power Header",
+      "pads": [
+        { "id": "J1_VCC", "pos": [-60, 0.8, -30], "size": [3, 3] },
+        { "id": "J1_GND", "pos": [-60, 0.8, -25], "size": [3, 3] }
+      ]
+    }
+  ],
+
+  "traces": [
+    {
+      "id": "VCC",
+      "net": "VCC",
+      "width": 1.5,
+      "path": [
+        [-60, 0.8, -30],
+        [-30, 0.8, -26]
+      ]
+    },
+    {
+      "id": "GND",
+      "net": "GND",
+      "width": 1.5,
+      "path": [
+        [-60, 0.8, -25],
+        [-10, 0.8, 20]
+      ]
+    },
+    {
+      "id": "LED_CTRL",
+      "net": "GPIO",
+      "width": 0.6,
+      "path": [
+        [-27, 0.8, -26],
+        [45, 0.8, -10]
+      ]
+    }
+  ],
+
+  "holes": [
+    { "id": "VIA1", "pos": [-5, 0, -5], "radius": 0.3 },
+    { "id": "VIA2", "pos": [25, 0, 5], "radius": 0.3 },
+    { "id": "MOUNT1", "pos": [-65, 0, -40], "radius": 1.5 },
+    { "id": "MOUNT2", "pos": [65, 0, -40], "radius": 1.5 },
+    { "id": "MOUNT3", "pos": [-65, 0, 40], "radius": 1.5 },
+    { "id": "MOUNT4", "pos": [65, 0, 40], "radius": 1.5 }
+  ]
+}
