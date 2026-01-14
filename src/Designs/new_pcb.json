@@ -1,0 +1,177 @@
+{
+  "board": {
+    "width": 40,
+    "height": 25,
+    "thickness": 1.6
+  },
+
+  "holes": [
+    { "id": "MH1", "pos": [-17, 0, -10], "radius": 0.9 },
+    { "id": "MH2", "pos": [17, 0, -10], "radius": 0.9 },
+    { "id": "MH3", "pos": [-17, 0, 10], "radius": 0.9 },
+    { "id": "MH4", "pos": [17, 0, 10], "radius": 0.9 }
+  ],
+
+  "components": [
+    {
+      "type": "ic",
+      "id": "U1",
+      "name": "SOT-23-6 Driver",
+      "description": "Small 6-pin driver IC",
+      "position": [0, 0.9, 0],
+      "size": [6, 2, 4]
+    },
+    {
+      "type": "resistor",
+      "id": "R1",
+      "value": "1k",
+      "description": "Series resistor for LED1",
+      "position": [-6, 0.9, 7],
+      "size": [4, 1.5, 2]
+    },
+    {
+      "type": "resistor",
+      "id": "R2",
+      "value": "1k",
+      "description": "Series resistor for LED2",
+      "position": [6, 0.9, 7],
+      "size": [4, 1.5, 2]
+    },
+    {
+      "type": "connector",
+      "id": "J1",
+      "name": "Input Header",
+      "description": "VIN / GND input header",
+      "position": [-18, 0.9, 0],
+      "size": [3, 2, 6]
+    },
+    {
+      "type": "connector",
+      "id": "J2",
+      "name": "Output Header",
+      "description": "LED channel outputs",
+      "position": [18, 0.9, 0],
+      "size": [3, 2, 8]
+    }
+  ],
+
+  "pads": [
+    { "id": "U1_P1", "component": "U1", "pin": 1, "net": "VIN", "pad_type": "SMD", "pos": [-3.5, 0.8, -2], "size": [1.2, 1.4] },
+    { "id": "U1_P2", "component": "U1", "pin": 2, "net": "CH1_IN", "pad_type": "SMD", "pos": [-3.5, 0.8, 0], "size": [1.2, 1.4] },
+    { "id": "U1_P3", "component": "U1", "pin": 3, "net": "GND", "pad_type": "SMD", "pos": [-3.5, 0.8, 2], "size": [1.2, 1.4] },
+    { "id": "U1_P4", "component": "U1", "pin": 4, "net": "CH2_IN", "pad_type": "SMD", "pos": [3.5, 0.8, 2], "size": [1.2, 1.4] },
+    { "id": "U1_P5", "component": "U1", "pin": 5, "net": "CH2_OUT", "pad_type": "SMD", "pos": [3.5, 0.8, 0], "size": [1.2, 1.4] },
+    { "id": "U1_P6", "component": "U1", "pin": 6, "net": "CH1_OUT", "pad_type": "SMD", "pos": [3.5, 0.8, -2], "size": [1.2, 1.4] },
+
+    { "id": "R1_P1", "component": "R1", "pin": 1, "net": "VIN", "pad_type": "SMD", "pos": [-10, 0.8, 7], "size": [1.6, 1.6] },
+    { "id": "R1_P2", "component": "R1", "pin": 2, "net": "CH1_IN", "pad_type": "SMD", "pos": [-2, 0.8, 7], "size": [1.6, 1.6] },
+
+    { "id": "R2_P1", "component": "R2", "pin": 1, "net": "VIN", "pad_type": "SMD", "pos": [2, 0.8, 7], "size": [1.6, 1.6] },
+    { "id": "R2_P2", "component": "R2", "pin": 2, "net": "CH2_IN", "pad_type": "SMD", "pos": [10, 0.8, 7], "size": [1.6, 1.6] },
+
+    { "id": "J1_VIN", "component": "J1", "pin": 1, "net": "VIN", "pad_type": "TH", "pos": [-18, 0.8, -2], "size": [1.8, 1.8] },
+    { "id": "J1_GND", "component": "J1", "pin": 2, "net": "GND", "pad_type": "TH", "pos": [-18, 0.8, 2], "size": [1.8, 1.8] },
+
+    { "id": "J2_CH1", "component": "J2", "pin": 1, "net": "CH1_OUT", "pad_type": "TH", "pos": [18, 0.8, -3], "size": [1.8, 1.8] },
+    { "id": "J2_CH2", "component": "J2", "pin": 2, "net": "CH2_OUT", "pad_type": "TH", "pos": [18, 0.8, 0], "size": [1.8, 1.8] },
+    { "id": "J2_GND", "component": "J2", "pin": 3, "net": "GND", "pad_type": "TH", "pos": [18, 0.8, 3], "size": [1.8, 1.8] }
+  ],
+
+  "traces": [
+    {
+      "id": "NET_VIN_BUS",
+      "net": "VIN",
+      "width": 0.8,
+      "layer": "Top Copper",
+      "from": "J1_VIN",
+      "to": "R2_P1",
+      "path": [
+        [-18, 0.81, -2],
+        [-14, 0.81, -2],
+        [-12, 0.81, 7],
+        [0, 0.81, 7],
+        [12, 0.81, 7]
+      ]
+    },
+    {
+      "id": "NET_R1_TO_U1",
+      "net": "CH1_IN",
+      "width": 0.4,
+      "layer": "Top Copper",
+      "from": "R1_P2",
+      "to": "U1_P2",
+      "path": [
+        [-2, 0.81, 7],
+        [-2, 0.81, 2],
+        [-3.5, 0.81, 0]
+      ]
+    },
+    {
+      "id": "NET_R2_TO_U1",
+      "net": "CH2_IN",
+      "width": 0.4,
+      "layer": "Top Copper",
+      "from": "R2_P2",
+      "to": "U1_P4",
+      "path": [
+        [10, 0.81, 7],
+        [10, 0.81, 2],
+        [3.5, 0.81, 2]
+      ]
+    },
+    {
+      "id": "NET_U1_CH1_OUT",
+      "net": "CH1_OUT",
+      "width": 0.4,
+      "layer": "Top Copper",
+      "from": "U1_P6",
+      "to": "J2_CH1",
+      "path": [
+        [3.5, 0.81, -2],
+        [10, 0.81, -2],
+        [18, 0.81, -3]
+      ]
+    },
+    {
+      "id": "NET_U1_CH2_OUT",
+      "net": "CH2_OUT",
+      "width": 0.4,
+      "layer": "Top Copper",
+      "from": "U1_P5",
+      "to": "J2_CH2",
+      "path": [
+        [3.5, 0.81, 0],
+        [12, 0.81, 0],
+        [18, 0.81, 0]
+      ]
+    },
+    {
+      "id": "NET_GND_RING",
+      "net": "GND",
+      "width": 0.6,
+      "layer": "Top Copper",
+      "from": "J1_GND",
+      "to": "J2_GND",
+      "path": [
+        [-18, 0.81, 2],
+        [-10, 0.81, 10],
+        [10, 0.81, 10],
+        [18, 0.81, 3]
+      ]
+    },
+    {
+      "id": "NET_GND_TO_U1",
+      "net": "GND",
+      "width": 0.35,
+      "layer": "Top Copper",
+      "from": "J1_GND",
+      "to": "U1_P3",
+      "path": [
+        [-18, 0.81, 2],
+        [-8, 0.81, 2],
+        [-3.5, 0.81, 2]
+      ]
+    }
+  ]
+}
+
