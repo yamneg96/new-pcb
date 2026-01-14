@@ -21,8 +21,19 @@ export function createTrace(start, end, width, raw) {
   // PlaneGeometry: width (X) x length (Y), then rotated into XZ plane
   const geometry = new THREE.PlaneGeometry(width, distance);
 
+  // Allow per-trace color override (e.g. to highlight specific nets)
+  let colorOption = undefined;
+  if (raw && raw.color) {
+    try {
+      colorOption = new THREE.Color(raw.color);
+    } catch {
+      colorOption = undefined;
+    }
+  }
+
   const material = createCopperMaterial({
     layer: PCB_LAYERS.TOP_COPPER,
+    ...(colorOption ? { baseColor: colorOption } : {}),
   });
 
   const mesh = new THREE.Mesh(geometry, material);
